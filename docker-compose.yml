@@ -1,0 +1,42 @@
+
+version: "3"
+
+services:
+
+
+  uwsgi:
+
+    container_name: uwsgi_container
+
+    build:
+      context: .
+      dockerfile: uwsgi.dockerfile
+
+    networks:
+      - common
+
+    restart: always
+
+
+  nginx:
+
+    container_name: nginx_container
+
+    depends_on:
+      - uwsgi
+
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+
+    networks:
+      - common
+
+    ports:
+      - 80:80
+
+    restart: always
+
+
+networks:
+  common:
