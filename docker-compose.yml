@@ -6,11 +6,12 @@ services:
 
   uwsgi:
 
-    container_name: uwsgi_container
-
     build:
       context: .
       dockerfile: uwsgi.dockerfile
+      args:
+        HOST: 0.0.0.0
+        PORT: 9000
 
     networks:
       - common
@@ -20,14 +21,16 @@ services:
 
   nginx:
 
-    container_name: nginx_container
-
     depends_on:
       - uwsgi
 
     build:
       context: .
       dockerfile: nginx.dockerfile
+      args:
+        NGINX_PORT: 80
+        UWSGI_HOST: uwsgi
+        UWSGI_PORT: 9000
 
     networks:
       - common

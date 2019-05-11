@@ -1,6 +1,6 @@
 [uwsgi]
 
-socket = 0.0.0.0:9000
+socket = ${HOST}:${PORT}
 protocol = http
 wsgi-file = app.py
 callable = app

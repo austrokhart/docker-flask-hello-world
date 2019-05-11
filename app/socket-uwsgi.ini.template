@@ -1,0 +1,10 @@
+[uwsgi]
+
+# the settings can be:
+# uwsgi --socket 127.0.0.1:3031 --wsgi-file myflaskapp.py --callable app --processes 4 --threads 2 --stats 127.0.0.1:9191
+# uwsgi --socket /tmp/uwsgi.sock --chmod-socket=666 --manage-script-name --mount /=app:app
+
+socket    = ${HOST}:${PORT}
+protocol  = uwsgi
+wsgi-file = app.py
+callable  = app
